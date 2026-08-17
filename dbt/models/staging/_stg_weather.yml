@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_weather
+    columns:
+      - name: city_id
+        tests:
+          - not_null
+      - name: ts
+        tests:
+          - not_null
+      - name: temperature
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: -70
+              max_value: 60
+              config:
+                severity: warn
+      - name: humidity
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+              config:
+                severity: warn
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - city_id
+            - ts

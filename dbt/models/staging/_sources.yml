@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: weather_hourly
+        loaded_at_field: loaded_at
+        freshness:
+          warn_after: {count: 2, period: day}
+          error_after: {count: 4, period: day}
+        columns:
+          - name: city_id
+            tests: [not_null]
+          - name: ts
+            tests: [not_null]

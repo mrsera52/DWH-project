@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: daily_city_weather
+    columns:
+      - name: city_id
+        tests:
+          - not_null
+      - name: weather_date
+        tests:
+          - not_null
+      - name: hours_count
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 24
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - city_id
+            - weather_date
+
+  - name: weather_anomalies
+    columns:
+      - name: is_anomaly
+        tests:
+          - not_null
+      - name: weather_date
+        tests:
+          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - city_id
+            - weather_date
