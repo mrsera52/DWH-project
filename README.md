@@ -27,8 +27,8 @@ docker compose up -d
 - Metabase — http://localhost:3000
 - Postgres — localhost:5433, база `weather`, юзер/пароль `weather`
 
-Дальше модно заходить в Airflow, включать DAG `weather_etl` и жать Trigger.
-тобы залить историю за период:
+Дальше модно заходить в Airflow, включать DAG `weather_etl` и жать Trigger.  
+чтобы залить историю за период:
 
 ```bash
 docker compose exec airflow-scheduler airflow dags backfill weather_etl -s 2024-06-01 -e 2024-06-10
